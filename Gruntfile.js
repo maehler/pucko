@@ -36,6 +36,10 @@ module.exports = function(grunt) {
             normalize: {
                 src: 'node_modules/normalize.css/normalize.css',
                 dest: 'css/normalize.css'
+            },
+            d3: {
+                src: 'node_modules/d3/dist/d3.min.js',
+                dest: 'js/d3.min.js'
             }
         },
         connect: {
@@ -78,7 +82,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-sass');
 
-    grunt.registerTask('js', ['uglify']);
+    grunt.registerTask('js', ['copy:d3', 'uglify']);
     grunt.registerTask('css', ['sass', 'autoprefixer', 'copy:normalize', 'cssmin']);
     grunt.registerTask('serve', ['connect', 'watch']);
 }
