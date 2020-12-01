@@ -2,9 +2,9 @@ module.exports = function(grunt) {
     const sass = require('node-sass');
 
     grunt.initConfig({
-        uglify: {
+        concat: {
             build: {
-                src: 'js/pucko.js',
+                src: ['js/nhlapi.js', 'js/pucko.js'],
                 dest: 'js/pucko.min.js'
             }
         },
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
                 tasks: 'css'
             },
             js: {
-                files: ['Gruntfile.js', 'js/pucko.js'],
+                files: ['Gruntfile.js', 'js/pucko.js', 'js/nhlapi.js'],
                 tasks: 'js'
             },
             html: {
@@ -77,12 +77,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-sass');
 
-    grunt.registerTask('js', ['copy:d3', 'uglify']);
+    grunt.registerTask('js', ['copy:d3', 'concat']);
     grunt.registerTask('css', ['sass', 'autoprefixer', 'copy:normalize', 'cssmin']);
     grunt.registerTask('serve', ['connect', 'watch']);
 }
